@@ -1,0 +1,25 @@
+input {
+    beats {
+        port => 5044 
+        }
+    }    
+filter {
+  grok {		
+      match => [ "message", "%{TIMESTAMP_ISO8601:logTimestamp} (?<field_1>\w+),(?<field_2>\w+)" ]
+  }
+  mutate {
+    add_tag => ["logstash"]
+  }
+  date {
+    match => ["logTimestamp", "yyyy/mm/dd HH:mm:ss"]
+    target => "@timestamp"
+}
+output {
+  elasticsearch {
+    hosts => "https://10.107.65.47:9200"
+    user => logstash_internal
+    password => password
+    index => "test-%{+YYYY.MM.dd}"
+    cacert => '/opt/logstash-8.0.1/certs/http_ca.crt'
+  }
+}
