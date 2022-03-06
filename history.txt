@@ -1,0 +1,745 @@
+    1  vi /etc/hosts
+    2  ping -c1 localhost
+    3  ping -c1 `hstname -f`
+    4  ping -c1 `hostname -f`
+    5  groupadd --system prometheus
+    6  useradd -s /sbin/nologin --system -g prometheus prometheus
+    7  subscription-manager register 
+    8  yum -y update
+    9  subscription-manager list --all --available
+   10  #subscription-manager remove --all ; subscription-manager unregister ; subscription-manager clean
+   11  subscription-manager remove --all ; subscription-manager unregister ; subscription-manager clean
+   12  vi /etc/yum.repos.d/redhat.repo
+   13  yum clean all
+   14  yum repolist
+   15  yum -y update
+   16  yum -y install chrony
+   17  systemctl enable chronyd
+   18  chronyc sources -v
+   19  mkdir /var/lib/prometheus
+   20  for i in rules rules.d files_sd; do  sudo mkdir -p /etc/prometheus/${i}; done
+   21  ll /etc/prometheus/
+   22  curl -s https://api.github.com/repos/prometheus/prometheus/releases/latest   | grep browser_download_url   | grep linux-amd64   | cut -d '"' -f 4   | wget -qi -
+   23  ll
+   24  tar -xvf prometheus-*.tar.gz
+   25  cd prometheus-*/
+   26  cp prometheus promtool /usr/local/bin/
+   27  cp -r prometheus.yml consoles/ console_libraries/ /etc/prometheus/
+   28  cd ~
+   29  vi /etc/prometheus/prometheus.yml 
+   30  vi /etc/systemd/system/prometheus.service
+   31  chown -R prometheus:prometheus /etc/prometheus
+   32  chmod -R 775 /etc/prometheus/
+   33  chown -R prometheus:prometheus /var/lib/prometheus/
+   34  systemctl daemon-reload
+   35  systemctl start prometheus
+   36  systemctl enable prometheus
+   37  systemctl status prometheus.service
+   38  firewall-cmd --add-port=9090/tcp --permanent
+   39  firewall-cmd --reload
+   40  ls
+   41  pwd
+   42  cd /opt/
+   43  ls
+   44  cd /usr/
+   45  ls
+   46  cd ~
+   47  ls
+   48  pwf
+   49  pwd
+   50  ls
+   51  tar -zxvf elasticsearch-8.0.1-linux-x86_64.tar.gz
+   52  ls
+   53  tar -zxvf logstash-8.0.1-linux-x86_64.tar.gzlogstash-8.0.1-linux-x86_64.tar.gz
+   54  tar -zxvf logstash-8.0.1-linux-x86_64.tar.gz
+   55  ls
+   56  tar -zxvf kibana-8.0.1-linux-x86_64.tar.gz 
+   57  ls
+   58  adduser elastic
+   59  su elastic
+   60  ls
+   61  cd /opt/
+   62  ls
+   63  cd ~
+   64  mv ./elasticsearch-8.0.1 /opt/
+   65  mv ./kibana-8.0.1 /opt/
+   66  mv ./logstash-8.0.1 /opt/
+   67  su elastic
+   68  cd /opt/
+   69  ls
+   70  chown -R elastic elasticsearch-8.0.1
+   71  ls
+   72  ll
+   73  su elastic
+   74  systemctl status firewalld
+   75  systemctl stop firewalld
+   76  ls
+   77  cd /opt/
+   78  ls
+   79  cd logstash-8.0.1/
+   80  ls
+   81  cd bin/
+   82  ./logstash
+   83  cd ../config/
+   84  ls
+   85  vi pipelines.yml 
+   86  cd ..
+   87  ls
+   88  cd config/
+   89  ls
+   90  cd ,,
+   91  vi pipelines.yml 
+   92  cd ..
+   93  mkdir conf
+   94  cd conf
+   95  ls
+   96  vi test.config
+   97  cd ..
+   98  cd config/
+   99  vi pipelines.yml 
+  100  pwd
+  101  cd ..
+  102  cd conf
+  103  pwd
+  104  ls
+  105  cd ..
+  106  cd config/
+  107  vi pipelines.yml 
+  108  cd ../bin/
+  109  ./logstash
+  110  cd ../config/
+  111  vi pipelines.yml 
+  112  cd ../bin/
+  113  ./logstash
+  114  cd ../conf/
+  115  vi test.config 
+  116  cd ../bin/
+  117  ./logstash
+  118  cd ..
+  119  ls
+  120  curl https://10.107.65.47:9200/
+  121  curl http://10.107.65.47:9200/
+  122  cd ..
+  123  cd elasticsearch-8.0.1/
+  124  ls
+  125  cd config/
+  126  ls
+  127  vi elasticsearch.yml 
+  128  pwd
+  129  cd ../../logstash-8.0.1/config/
+  130  vi logstash.yml 
+  131  cd ../bin/
+  132  ./logstash
+  133  cd ../confgi
+  134  cd ../config/
+  135  vi logstash.yml 
+  136  cd ../..
+  137  cd logstash-8.0.1/bin/
+  138  ./logstash
+  139  cd ..
+  140  cd conf/
+  141  vi test.config 
+  142  cd ../
+  143  cd bin/
+  144  ./logstash
+  145  cd ../
+  146  cd config
+  147  ls
+  148  vi logstash.yml 
+  149  ccd ../bin/
+  150  cd ../bin/
+  151  ./logstash
+  152  cd ..
+  153  cd logstash-8.0.1/
+  154  cd conf
+  155  vi test.config 
+  156  cd ..
+  157  cd bin/
+  158  ./logstash
+  159  cd ..
+  160   cd ..
+  161  cd elasticsearch-8.0.1/
+  162  ps -ef|grep elast
+  163  kill -9 207022
+  164  cd config/
+  165  ls
+  166  vi elasticsearch.yml 
+  167  cd ../bin/
+  168  ./elasticsearch
+  169  su elastic
+  170  pwd
+  171  cd ../../logstash-8.0.1/
+  172  ls
+  173  cd conf
+  174  vi test.config 
+  175  cd ../config/
+  176  vi logstash.yml 
+  177  cd ..
+  178  cd bin/
+  179  ./logstash
+  180  ./logstash -d
+  181  cd ../../kibana-8.0.1/
+  182  cd bin/
+  183  ls
+  184  ./kibana
+  185  ./kibana --allow-root
+  186  ls
+  187  cd ../
+  188  cd config/
+  189  ls
+  190  vi kibana.yml 
+  191  cd ../
+  192  cd bin/
+  193  ./kibana --allow-root -d
+  194  ./kibana --allow-root -e http://10.107.65.47:9200
+  195  cat /etc/hosts 
+  196  cat /etc/redhat-release 
+  197  cd /opt/
+  198  ls
+  199  vi elk_up.sh
+  200  cd kibana-8.0.1/
+  201  ls
+  202  cd bin/
+  203  ./kibana --allow-root &
+  204  ls
+  205  cd ..
+  206  cd config/
+  207  ls
+  208  vi kibana.yml 
+  209  cd ~
+  210  ls
+  211  cp filebeat-8.0.1-linux-x86_64.tar.gz /opt/
+  212  cd /opt/
+  213  ls
+  214  tar zxvf filebeat-8.0.1-linux-x86_64.tar.gz 
+  215  ls
+  216  top
+  217  cd ..
+  218  ls
+  219  cd /opt/
+  220  ls
+  221  cd filebeat-8.0.1-linux-x86_64/
+  222  ls
+  223  vi filebeat.yml 
+  224  ./filebeat -c ./filebeat.yml 
+  225  ls
+  226  cd logs/
+  227  ls
+  228  vi filebeat-20220304.ndjson 
+  229  cd ..
+  230  cd ../logstash-8.0.1/
+  231  ls
+  232  cd logs
+  233  ls
+  234  vi logstash-json.log
+  235  ll
+  236  cd ..
+  237  ls
+  238  cd ../filebeat-8.0.1-linux-x86_64/
+  239  ./filebeat -c ./filebeat.yml &
+  240  cd ../logstash-8.0.1/
+  241  ls
+  242  ps -ef |grep logstash
+  243  ps -ef |grep logs
+  244  ls
+  245  vi config/
+  246  cd config
+  247  ls
+  248  vi pipelines.yml 
+  249  cd ../conf
+  250  ls
+  251  vi test.config 
+  252  cd ../config
+  253  ls
+  254  vi logstash.yml 
+  255  pwd
+  256  vi logstash.yml 
+  257  cd ..
+  258  jobs
+  259  ls
+  260  cd bin/
+  261  ls
+  262  history
+  263  ./logstash
+  264  ls
+  265  cd ..
+  266  ls
+  267  cd logs
+  268  ls
+  269  ll
+  270  cd ..
+  271  ll
+  272  vi logstash-plain.log
+  273  cd bin/
+  274  ls
+  275  ./logstash &
+  276  cd ..
+  277  cd ../elasticsearch-8.0.1/
+  278  cd config/
+  279  ls
+  280  cd ../../kibana-8.0.1/
+  281  jobs
+  282  bg 3
+  283  fg 3
+  284  cd ../
+  285  cd elasticsearch-8.0.1/
+  286  cd cin
+  287  cd config/
+  288  ls
+  289  vu elasticsearch.yml 
+  290  vi elasticsearch.yml 
+  291  jobs
+  292  ps -ef|grep elastic
+  293  ls
+  294  cd ..
+  295  ls
+  296  cd logs/
+  297  ls
+  298  ll
+  299  vi gc.log
+  300  cd ../..
+  301  ls
+  302  cd elasticsearch-8.0.1/
+  303  cd config/
+  304  ls
+  305  vi elasticsearch.yml 
+  306  ps -df|grep elastic
+  307  kill -9 213570
+  308  ps -df|grep elastic
+  309  jobs
+  310  ps -ef |grep kibana
+  311  ps -ef |grep kibanafg 1
+  312  fg 1
+  313  jobs
+  314  fg 2
+  315  jobs
+  316  cd ..
+  317  cd bin/
+  318  su elastic
+  319  ls
+  320  pwd
+  321  cd ..
+  322  ls
+  323  cd data/
+  324  ls
+  325  cd indices/
+  326  ls
+  327  ll
+  328  cd ..
+  329  pwd
+  330  sysctl -w vm.max_map_count=262144
+  331  cd ..
+  332  cd bin/
+  333  su elastic
+  334  ps -ef|grep beat
+  335  cd ../..
+  336  ls
+  337  cd filebeat-8.0.1-linux-x86_64/
+  338  ls
+  339  vi filebeat.yml 
+  340  cd /var/log/
+  341  ls
+  342  ll
+  343  cd /opt/filebeat-8.0.1-linux-x86_64/
+  344  vi filebeat.yml 
+  345  cd /opt/
+  346  ls
+  347  mkdir testlog
+  348  cd testlog
+  349  ls
+  350  vi test_1.txt
+  351  cd ..
+  352  ls
+  353  cd filebeat-8.0.1-linux-x86_64/
+  354  vi filebeat.yml 
+  355  ls
+  356  ./filebeat ./filebeat.yml 
+  357  ./filebeat -c ./filebeat.yml 
+  358  ./filebeat -c ./filebeat.yml &
+  359  cd logs/
+  360  ls
+  361  ll
+  362  vi filebeat-20220304-3.ndjson
+  363  fg 1
+  364  cd ..
+  365  ls
+  366  vi filebeat.yml 
+  367  ./filebeat -c ./filebeat.yml &
+  368  fg 1
+  369  vi filebeat.yml 
+  370  ./filebeat -c ./filebeat.yml 
+  371  vi filebeat.yml 
+  372  ./filebeat -c ./filebeat.yml 
+  373  vi filebeat.yml 
+  374  ./filebeat -c ./filebeat.yml 
+  375  vi filebeat.yml 
+  376  ./filebeat -c ./filebeat.yml 
+  377  vi filebeat.yml 
+  378  ./filebeat -c ./filebeat.yml 
+  379  cd ..
+  380  ls
+  381  cd logstash-8.0.1/
+  382  ls
+  383  mv conf conf.d
+  384  ls
+  385  cd config/
+  386  ls
+  387  vi pipelines.yml 
+  388  cd ../conf.d/
+  389  ls
+  390  vi test.config 
+  391  cat /opt/testlog/test_1.txt 
+  392  vi test.config 
+  393  jobs
+  394  cd ..
+  395  cd ../filebeat-8.0.1-linux-x86_64/
+  396  ls
+  397  vi filebeat.yml 
+  398  jobs
+  399  ls
+  400  ./filebeat ./filebeat.yml 
+  401  ./filebeat -c ./filebeat.yml 
+  402  cd ..
+  403  cd filebeat-8.0.1-linux-x86_64/
+  404  cd logs/
+  405  ls
+  406  ll
+  407  vi filebeat-20220304-7.ndjson
+  408  cd ..
+  409  vi filebeat.yml 
+  410  cd ..
+  411  ls
+  412  cd logstash-8.0.1/
+  413  ls
+  414  cd bin/
+  415  ls
+  416  ./logstash &
+  417  jobs
+  418  fg 1
+  419  ./system-install
+  420  systemctl status logstash
+  421  systemctl start logstash
+  422  systemctl status logstash
+  423  systemctl start logstash
+  424  systemctl status logstash
+  425  cd /etc/systemd/
+  426  ls
+  427  cd /run/log/journal/
+  428  ls
+  429  vi b326bdb00df44f1ca0e33c135aa2bc51
+  430  cd b326bdb00df44f1ca0e33c135aa2bc51/
+  431  ls
+  432  vi system@4e7d74e3f3454aa883719d954ed83182-0000000000000001-0005d935b587cd14.journal 
+  433  vi system.journal 
+  434  journalctl -f
+  435  journalctl 
+  436  cd /etc/systemd/system/
+  437  ls
+  438  vi logstash.service 
+  439  adduser logstash
+  440  cd /opt/
+  441  ls
+  442  ll
+  443  chown -R logstash.service: Failed to determine user credentials: No such process
+  444  chown -R logstash logstash-8.0.1
+  445  ll
+  446  cd elasticsearch-8.0.1/
+  447  ls
+  448  cd bin/
+  449  ls
+  450  systemctl start logstash
+  451  systemctl status logstash
+  452  cd /run/systemd/system/
+  453  ls
+  454  cd ..
+  455  ls
+  456  cd journal/
+  457  ls
+  458  journalctl -f
+  459  cd /opt/kibana-8.0.1/
+  460  ls
+  461  vi bin/
+  462  cd bin/
+  463  ls
+  464  vi kibana-setup 
+  465  ./kibana-setup 
+  466  cd ../../elasticsearch-8.0.1/bin/
+  467  ls
+  468  ./elasticsearch-create-enrollment-token
+  469  ./elasticsearch-create-enrollment-token -s kibana --url "http://10.107.65.47:9200/"
+  470  l
+  471  ls
+  472  cd ..
+  473  cd ../logstash-8.0.1/
+  474  ls
+  475  cd bin/
+  476  ls
+  477  ./logstash & >logfile.log
+  478  job
+  479  jobs
+  480  fg 1
+  481  ./logstash > logfile.log &
+  482  ls
+  483  fg 1
+  484  ./logstash > /dev/null &
+  485  cd ..
+  486  cd logs
+  487  ls
+  488  cd ..
+  489  ls
+  490  cd bin/
+  491  ls
+  492  vi logfile.log
+  493  cd ..
+  494  cd ../filebeat-8.0.1-linux-x86_64/
+  495  ls
+  496  ./filebeat -c filebeat.yml 
+  497  ./filebeat -c filebeat.yml &
+  498  jobs
+  499  cd /opt/testlog/
+  500  ls
+  501  cat test_1.txt 
+  502  vi test_2.txt 
+  503  ll
+  504  cd /opt/filebeat-8.0.1-linux-x86_64/logs/
+  505  ls
+  506  ll
+  507  vi filebeat-20220304-9.ndjson
+  508  cd ../..
+  509  ls
+  510  cd logstash-8.0.1/logs
+  511  ls
+  512  ll
+  513  cd ..
+  514  ll
+  515  vi logstash-plain.log
+  516  cd ../elasticsearch-8.0.1/
+  517  ls
+  518  cd data/
+  519  ls
+  520  cd indices/
+  521  ls
+  522  ll
+  523  cd iJl22Hz1TFCWPG9UB2MYnwiJl22Hz1TFCWPG9UB2MYnw
+  524  cd iJl22Hz1TFCWPG9UB2MYnw
+  525  ls
+  526  cd 0
+  527  ls
+  528  cd index/
+  529  ls
+  530  cd ../..
+  531  cd ..
+  532  cd /opt/testlog/
+  533  ls
+  534  vi test_2.txt 
+  535  cd /opt/filebeat-8.0.1-linux-x86_64/logs/
+  536  ll
+  537  vi filebeat-20220304-9.ndjson
+  538  cd ../..
+  539  cd logstash-8.0.1/logs
+  540  ls
+  541  cd ..
+  542  ll
+  543  vi logstash-plain.log
+  544  cd ../
+  545  cd logstash-8.0.1/
+  546  ls
+  547  cd con.f
+  548  cd conf.d/
+  549  ls
+  550  vi test.config 
+  551  jobs
+  552  fg 1
+  553  ./logstash > /dev/null &
+  554  jobs
+  555  cd ../bin/
+  556  ./logstash > /dev/null &
+  557  cd /opt/testlog/
+  558  ls
+  559  vi test_2.txt 
+  560  cd ../..
+  561  ls
+  562  cd /opt/kibana-8.0.1/
+  563  ls
+  564  cd config/
+  565  ls
+  566  vi kibana.yml 
+  567  cd ..
+  568  cd bin/
+  569  ./kibana &
+  570  ./kibana --allow-root &
+  571  jobs
+  572  cd /opt/elasticsearch-8.0.1/logs/
+  573  ls
+  574  ll
+  575  vi elasticsearch.log
+  576  vi gc.log
+  577  cd ..
+  578  cd bin/
+  579  ./elasticsearch-create-enrollment-token
+  580  ./elasticsearch-create-enrollment-token -s kibana
+  581  ./elasticsearch-create-enrollment-token -f -s kibana
+  582  jobs
+  583  ./elasticsearch-create-enrollment-token -s kibana --url "http://10.107.65.47:9200"
+  584  fg 4
+  585  ls
+  586  ll
+  587  cd../..
+  588  cd ../..
+  589  ls
+  590  vi elk_up.sh 
+  591  jobs
+  592  fg 3
+  593  fg 2
+  594  ps -ef|grep elastic
+  595  kill -9 223512
+  596  cd elasticsearch-8.0.1/
+  597  ls
+  598  cd config/
+  599  vi elasticsearch.yml 
+  600  cd ~
+  601  ls
+  602  cp elasticsearch-8.0.1-linux-x86_64.tar.gz /opt/
+  603  cd /opt/
+  604  ls
+  605  ll
+  606  rm -rf elasticsearch-8.0.1
+  607  tar -zxvf elasticsearch-8.0.1-linux-x86_64.tar.gz 
+  608  cd elasticsearch-8.0.1/
+  609  cd config/
+  610  vi elasticsearch.yml 
+  611  cd ..
+  612  ls
+  613  chwon -R elastic elasticsearch-8.0.1
+  614  chown -R elastic elasticsearch-8.0.1
+  615  ll
+  616  cd elasticsearch-8.0.1/
+  617  cd bin/
+  618  ls
+  619  su elastic
+  620  pwd
+  621  cd ../../kibana-8.0.1/
+  622  cd bin/
+  623  ./kibana &
+  624  ./kibana --allow-root &
+  625  jobs
+  626  cd ..
+  627  cd ../logstash-8.0.1/
+  628  ls
+  629  cd logs
+  630  cd ../bin/
+  631  l
+  632  ls
+  633  ./logstash > /dev/null &
+  634  cd ../..
+  635  ls
+  636  cd filebeat-8.0.1-linux-x86_64/
+  637  ls
+  638  ./filebeat -c filebeat.yml &
+  639  cd ../logstash-8.0.1/
+  640  ls
+  641  ll
+  642  vi logstash-plain.loglogstash-plain.log
+  643  vi logstash-plain.log
+  644  jobs
+  645  fg 2
+  646  ls
+  647  cd config/
+  648  vi pipelines.yml 
+  649  cd ../con.f
+  650  cd ../conf.d
+  651  ls
+  652  vi test.config 
+  653  cd ..
+  654  ls
+  655  cd config
+  656  vi logstash.yml 
+  657  cd ../conf.d/
+  658  vi test.config 
+  659  cd ..
+  660  ls
+  661  cd config/
+  662  ls
+  663  cd ..
+  664  cd bin/
+  665  ls
+  666  ./logstash > /dev/null &
+  667  cd ..
+  668  ls
+  669  ll
+  670  vi logstash-plain.log
+  671  jobs
+  672  fg 4
+  673  cd conf.d/
+  674  vi test.config 
+  675  cd ../config/
+  676  vi logstash.yml 
+  677  cd ..
+  678  ls
+  679  cd bin/
+  680  ./logstash
+  681  ls
+  682  pwd
+  683  cd ..
+  684  ls
+  685  cd ../elasticsearch-8.0.1/
+  686  ls
+  687  cd config/
+  688  ls
+  689  cd certs/
+  690  ls
+  691  cp http_ca.crt /opt/logstash-8.0.1/
+  692  cd /opt/logstash-8.0.1/
+  693  ls
+  694  mkdir certs
+  695  mv http_ca.crt ./certs/
+  696  ls
+  697  cd certs/
+  698  ls
+  699  pwd
+  700  cd ../conf.d/
+  701  vi test.config 
+  702  cd ..
+  703  ls
+  704  cd bin/
+  705  ./logstash
+  706  jobs
+  707  ./logstash > /dev/null &
+  708  cd /opt/testlog/
+  709  vi test_2.txt 
+  710  cd ..
+  711  cd logstash-8.0.1/conf.d/
+  712  vi test.config 
+  713  cd /opt/testlog/
+  714  ls
+  715  vi test_2.txt 
+  716  cd ../
+  717  cd logstash-8.0.1/
+  718  cd conf.d/
+  719  vi test.config 
+  720  cd /opt/testlog/
+  721  ls
+  722  cd /opt/logstash-8.0.1/conf.d/
+  723  pwd
+  724  ls
+  725  cat /etc/hosts
+  726  git
+  727  pwd
+  728  cd /home
+  729  ll
+  730  cd elastic
+  731  ll
+  732  cd ..
+  733  cd logstash
+  734  ll
+  735  cd ..
+  736  cd /tmp
+  737  ll
+  738  mkdir file
+  739  cd file
+  740  ll
+  741  git clone https://github.com/fstop-andy-lee/file.git
+  742  ll
+  743  cd file
+  744  ll
+  745  history > history.txt
